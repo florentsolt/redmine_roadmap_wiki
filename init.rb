@@ -15,8 +15,10 @@ end
 class RoadmapWikiViewListener < Redmine::Hook::ViewListener
   # Adds javascript and stylesheet tags
   def view_layouts_base_html_head(context)
-    javascript_include_tag("roadmap.min.js", :plugin => "redmine_roadmap_wiki") +
-    javascript_include_tag("d3.min.js", :plugin => "redmine_roadmap_wiki")
+    if context[:request].params[:controller] == "wiki"
+      javascript_include_tag("roadmap.min.js", :plugin => "redmine_roadmap_wiki") +
+      javascript_include_tag("d3.min.js", :plugin => "redmine_roadmap_wiki")
+    end
   end
 end
 
